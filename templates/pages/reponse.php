@@ -22,7 +22,7 @@
  <?php
  
  // Connexion à la BDD
- $bdd = new PDO("mysql:host=172.18.0.1;dbname=faq-alau;charset=UTF8", "faq-alau", "V!21ukbuk");
+ /*$bdd = new PDO("mysql:host=172.18.0.1;dbname=faq-alau;charset=UTF8", "faq-alau", "V!21ukbuk");*/
  $sql = "SELECT * FROM `questions` WHERE `id` = :id";
  $req = $bdd->prepare($sql);
  $id = $_GET['id'] ?? null; // récupère l'id dans l'URL (ex: page.php?id=5)
@@ -67,7 +67,7 @@ if ($id) {
     <textarea name="reponse" id="reponse" rows="6" cols="60" required></textarea><br>
 
     <button type="submit" class="submit">Envoyer la réponse</button>
-    <a href="../../acceuil.php" class="back">Retour</a>
+    <button class="back"><a href="../../acceuil.php" >Retour</a></button>
 </form>
 </div>
 </body>

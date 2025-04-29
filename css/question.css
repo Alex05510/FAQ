@@ -53,6 +53,11 @@ button.submit:hover {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+}
+.back a{
+    color: white;
+    text-decoration: none;
 }
 .back:hover {
     background-color: #5A6A7A; 

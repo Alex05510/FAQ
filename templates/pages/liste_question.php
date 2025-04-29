@@ -16,16 +16,9 @@
 include_once('library/init.php'); // Initialisation de la BDD et des messages d'erreur
 include_once('library/bdd.php'); 
 
-// Connexion à la BDD
-$bdd = new PDO("mysql:host=172.18.0.1;dbname=faq-alau;charset=UTF8", "faq-alau", "V!21ukbuk");
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // Affiche des avertissements sans bloquer le script
-
-if (!$bdd) {
-    echo "Erreur : Impossible de se connecter à la base de données.";
-}
 
 
-// Récupérer toutes les questions
+
 // Récupérer toutes les questions
 $sql = "SELECT * FROM questions ORDER BY date DESC";
 $questions = bddRequest($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -50,7 +43,7 @@ $reponses = bddRequest($sql)->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <h1>FAQ</h1>
-<button class="newQuestion"><a href="templates/pages/question.php">Poser une nouvelle question</a></button>
+<a href="templates/pages/question.php"><button class="newQuestion">Poser une nouvelle question</button></a>
 
 <?php if (!empty($questions)): ?>
     <ul class="questions">

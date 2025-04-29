@@ -48,7 +48,7 @@ button.submit {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
-button.submit:hover {
+button.submit:hover{
     background-color: #8F4A15;
     transform: scale(1.05);
 }
@@ -60,8 +60,16 @@ button.submit:hover {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
 }
-.back:hover {
+.back a {
+    color: white;
+    text-decoration: none;
+}
+button.back:hover {
     background-color: #5A6A7A; 
     transform: scale(1.05);
+}
+.question-details {
+    text-align: center;
 }

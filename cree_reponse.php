@@ -1,14 +1,23 @@
 <?php
-// Bon, première chose, on se connecte à la base de données
-$bdd = new PDO("mysql:host=172.18.0.1;dbname=faq-alau;charset=UTF8", "faq-alau", "V!21ukbuk", [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION // On active le mode "exception" histoire que ça gueule bien en cas de pépin
-]);
+/**
+ * Contrôlleur
+ * 
+ * Role :
+ * - Établit une connexion à la base de données.
+ * - Vérifie la soumission d'un formulaire avant traitement.
+ * - Valide les données envoyées par l'utilisateur.
+ * - Insère la réponse dans la table reponses avec la date d'enregistrement.
+ * - Redirige l'utilisateur vers la page d'accueil en cas de succès.
+ * 
+ * Paramètres :
+ * - id_question  : Identifiant de la question concernée.
+ * - pseudo  : Nom ou pseudonyme de l'utilisateur.
+ * - reponse  : Texte de la réponse.
+ */
 
-// On vérifie que la connexion est bien passée
-if ($bdd) {
-} else {
-    echo("Erreur de connexion à la base de données."); //  message d'erreur si jamais ça bug
-}
+
+include_once("library/init.php");
+include_once("library/bdd.php"); 
 
 // check si le formulaire a bien été envoyé
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -17,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $pseudo = $_POST['pseudo'] ?? null;
     $reponse = $_POST['reponse'] ?? null;
 
-    // On s’assure que tous les champs sont remplis avant de continuer 
+    // On s’assure que tous les champs sont remplis 
     if (!empty($id_question) && !empty($pseudo) && !empty($reponse)) {
         // On prépare la requête SQL pour insérer la réponse dans la table reponses
         $sql = "INSERT INTO reponses (id_question, pseudo, reponse, date) VALUES (:id_question, :pseudo, :reponse, NOW())";
@@ -33,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: acceuil.php");
             exit(); // On arrête le script 
         } else {
-            echo "Erreur lors de l'enregistrement de la réponse."; // Message d’erreur en cas de bug
+            echo "Erreur lors de l'enregistrement de la réponse."; // message d'erreur si jamais ça bug
         }
     }
 }

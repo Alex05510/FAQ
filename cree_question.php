@@ -1,6 +1,22 @@
 <?php
+/**
+ * Contrôleur
+ * 
+ * Rôle :
+ * - Vérifie la connexion à la base de données avant traitement.
+ * - Vérifie que le formulaire a bien été soumis via la méthode POST.
+ * - Valide les données envoyées 
+ * - Insère la question dans la table questions avec la date d'enregistrement.
+ * - Redirige l'utilisateur vers la page d'accueil après l'enregistrement réussi.
+ * 
+ * Paramètres du formulaire attendus :
+ * - pseudo : Nom ou pseudonyme de l'utilisateur.
+ * - question : Texte de la question posée.
+ */
 include_once("library/init.php"); 
-require_once("library/bdd.php");
+include_once("library/bdd.php");
+include_once("model/articles.php");
+
 
 //  vérification que la connexion à la BDD est bien en place
 if (!$bdd) {
@@ -10,25 +26,24 @@ if (!$bdd) {
 
 // on check si le formulaire a été envoyé 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // On récupère les données qui ont été envoyées par le formulaire
-    $pseudo = $_POST['pseudo'] ?? ''; // Si y'a rien, on met une chaîne vide pour éviter les erreurs
+    // Récupérer les données envoyées
+    $pseudo = $_POST['pseudo'] ?? '';
     $question = $_POST['question'] ?? '';
 
-    // On s'assure que les champs ne sont pas vides 
+    // Vérifier que les champs ne sont pas vides
     if (!empty($pseudo) && !empty($question)) {
-        
-        // utilisation de la requête de bdd.php
-        $id_question = bddInsertQuestion($pseudo, $question);
+        // Insérer la question dans la base de données avec ta fonction
+        $sql = "INSERT INTO questions (pseudo, question, date) VALUES (:pseudo, :question, NOW())";
+        $param = ['pseudo' => $pseudo, 'question' => $question];
 
-        // Si la question a été bien insérée 
-        if ($id_question > 0) {
-            header("Location: acceuil.php"); // on redirige l'utilisateur vers l'accueil
-            exit(); // si c'est bon on stoppe le script ici
+        if (bddRequest($sql, $param)) {
+            header("Location: acceuil.php");
+            exit();
         } else {
-            echo "Erreur lors de l'ajout de la question."; // sinon on affiche un message d'erreur
+            echo "Erreur lors de l'ajout de la question.";
         }
     } else {
-        echo "Erreur : Tous les champs doivent être remplis."; //  si quelqu'un essaie d'envoyer un truc vide
+        echo "Erreur : Tous les champs doivent être remplis.";
     }
 }
 ?>
