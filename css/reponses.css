@@ -1,0 +1,67 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-image: url("../assets/background/FAQ.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+}
+h2 {
+    text-align: center;
+    color: #2E2E2E; 
+}
+p {
+    width: 75%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 38%;
+    margin-left: 36%;
+}
+form {
+    border: solid 1px #B5651D; 
+    width: 50%;
+    padding: 5rem;
+    background-color: #F5F5F5; 
+    border-radius: 0.5rem;
+    background: rgba(112, 128, 144, 0.3);
+}
+input[type="text"], textarea#reponse {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: solid 1px #708090;
+    border-radius: 0.5rem;
+    background-color: #FFFFFF; 
+    color: #2E2E2E; 
+}
+button.submit {
+    margin-left: 25%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #B5651D; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+button.submit:hover {
+    background-color: #8F4A15;
+    transform: scale(1.05);
+}
+.back {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #708090; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.back:hover {
+    background-color: #5A6A7A; 
+    transform: scale(1.05);
+}
